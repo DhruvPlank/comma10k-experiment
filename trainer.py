@@ -202,7 +202,7 @@ class SegNet(pl.LightningModule):
                  eps=1e-7,
                  height=14*32,
                  width=18*32,
-                 num_workers=8,
+                 num_workers=40,
                  epochs=30,
                  gpus=1,
                  weight_decay=1e-3,
@@ -355,8 +355,8 @@ class SegNet(pl.LightningModule):
 
 ## Setting up loggers for Callbacks
 log_path = Path('/home/patel4db/comma10k-exp/loggerd')
-name = 'efficientnet-b0'
-version = 'first-stage'
+name = args.backbone
+version = args.version
 tb_logger = TensorBoardLogger(log_path, name=name, version=version)
 lr_logger = LearningRateLogger(logging_interval='epoch')
 ckpt_callback = ModelCheckpoint(filepath=Path(tb_logger.log_dir)/'checkpoints/{epoch:02d}_{val_loss:.4f}', 
